@@ -2,9 +2,13 @@ const express = require('express');
 const redis = require('redis');
 
 const app = express();
-const client = redis.createClient();
-
-client.set('visits', 0);
+const client = redis.createClient({
+    // connection url, in case of docker it is service name
+    host: 'redis-server',
+    port: 6379
+});
+// initialize value in visits key
+client.set('visits', 1);
 
 app.get('/', (req, res) => {
     client.get('visits', (err, visits) => {

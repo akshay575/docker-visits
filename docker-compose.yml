@@ -1,0 +1,14 @@
+# docker-compose version
+version: 3
+# essentially services are containers
+services:
+  # create redis-server container using redis image
+  redis-server:
+    image: 'redis'
+  # create node-app container using Dockerfile present in current dir
+  node-app:
+    build: .
+    # port mapping, port on our system:port listening in container
+    ports:
+      # - is used to specify an array
+      - "4001:8081"
